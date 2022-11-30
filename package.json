@@ -1,0 +1,26 @@
+{
+  "name": "tasks-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vickyions/tasks-api.git"
+  },
+  "author": "Vicky Soni",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/vickyions/tasks-api/issues"
+  },
+  "homepage": "https://github.com/vickyions/tasks-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.4"
+  }
+}

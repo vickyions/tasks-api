@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const {default: mongoose} = require("mongoose");
 const Task = require("../models/Tasks");
 
 router.get("/", async (_req, res) => {
@@ -59,6 +60,35 @@ router.post("/", async (req, res) => {
             });
         }
     } catch (err) {
+        res.status(500).json({
+            error: "Some error ocurred while creating the task",
+        });
+    }
+});
+
+//bulk delete
+
+router.delete("/", async (req, res) => {
+    try {
+        const { tasks } = req.body;
+        if (!tasks) {
+            return res.status(404).json({ error: "Provide valid tasks array with object containing ids to delete" });
+        }
+
+        const deleteQueryArr = tasks.map(taskObj => {
+            return taskObj.id
+        })
+        //console.log(deleteQueryArr)
+        const result = await Task.deleteMany({_id: { $in : deleteQueryArr}});
+
+        console.log(result, "deleted");
+        if (result) {
+            res.status(204).end();
+        } else {
+            res.status(404).json({ error: "No task with that id exists" });
+        }
+    } catch (err) {
+        console.log(err);
         res.status(500).json({
             error: "Some error ocurred while creating the task",
         });
